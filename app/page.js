@@ -1,16 +1,23 @@
 "use client";
 
 import React, { useState } from "react";
+import GeneralCategory from "./components/generalCategory";
+import EntertainmentCategory from "./components/entertainmentCategory";
 
 export default function Home() {
-  const [category, setCategory] = useState(true);
+  const [section, setSection] = useState(true);
+  const [category, setCategory] = useState("");
 
-  const goToGeneral = () => {
-    setCategory(true);
+  const firstSection = () => {
+    setSection(true);
   };
 
-  const goToEntertainment = () => {
-    setCategory(false);
+  const secondSection = () => {
+    setSection(false);
+  };
+
+  const updateCategory = (newCategory) => {
+    setCategory(newCategory);
   };
 
   return (
@@ -28,17 +35,22 @@ export default function Home() {
           </p>
         </div>
         <div className="flex flex-col items-center">
+          {/* TODO: this is a placeholder test for updating the category */}
+          <p className="text-yellow-200 text-md">
+            Current category: {category}
+          </p>
+          {/* ^^^ TO BE REMOVED ^^^ */}
           <p className="text-yellow-200 text-md">Go to:</p>
           <div>
             <button
               className="bg-green-400 text-green-700 w-52 h-8 rounded-lg m-2 hover:bg-green-500 transition-colors "
-              onClick={goToGeneral}
+              onClick={firstSection}
             >
               General & Sciences
             </button>
             <button
               className="bg-purple-400 text-purple-700 w-52 h-8 rounded-lg m-2 hover:bg-purple-500 transition-colors"
-              onClick={goToEntertainment}
+              onClick={secondSection}
             >
               Entertainment
             </button>
@@ -46,71 +58,10 @@ export default function Home() {
         </div>
 
         <>
-          {category ? (
-            <div className="my-4 h-2/5 md:h-4/6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 overflow-auto">
-              <div className="flex flex-col justify-between bg-green-400 rounded-md h-32 p-2 cursor-pointer hover:bg-green-500 transition-colors">
-                <div>
-                  <p className="text-xl text-green-700">Category title here!</p>
-                  <p className="text-sm text-green-700">
-                    Brief category description
-                  </p>
-                </div>
-                <div className="text-right text-sm text-green-700">
-                  <p>Press to select!</p>
-                </div>
-              </div>
-              <div className="flex flex-col justify-between bg-green-400 rounded-md h-32 p-2 cursor-pointer hover:bg-green-500 transition-colors">
-                <div>
-                  <p className="text-xl text-green-700">Category title here!</p>
-                  <p className="text-sm text-green-700">
-                    Brief category description
-                  </p>
-                </div>
-                <div className="text-right text-sm text-green-700">
-                  <p>Press to select!</p>
-                </div>
-              </div>
-              <div className="flex flex-col justify-between bg-green-400 rounded-md h-32 p-2 cursor-pointer hover:bg-green-500 transition-colors">
-                <div>
-                  <p className="text-xl text-green-700">Category title here!</p>
-                  <p className="text-sm text-green-700">
-                    Brief category description
-                  </p>
-                </div>
-                <div className="text-right text-sm text-green-700">
-                  <p>Press to select!</p>
-                </div>
-              </div>
-            </div>
+          {section ? (
+            <GeneralCategory onCategoryUpdate={updateCategory} />
           ) : (
-            <div className="my-4 h-2/5 md:h-4/6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 overflow-auto">
-              <div className="flex flex-col justify-between bg-purple-400 rounded-md h-32 p-2 cursor-pointer hover:bg-purple-500 transition-colors">
-                <div>
-                  <p className="text-xl text-purple-700">
-                    Category title here!
-                  </p>
-                  <p className="text-sm text-purple-700">
-                    Brief category description
-                  </p>
-                </div>
-                <div className="text-right text-sm text-purple-700">
-                  <p>Press to select!</p>
-                </div>
-              </div>
-              <div className="flex flex-col justify-between bg-purple-400 rounded-md h-32 p-2 cursor-pointer hover:bg-purple-500 transition-colors">
-                <div>
-                  <p className="text-xl text-purple-700">
-                    Category title here!
-                  </p>
-                  <p className="text-sm text-purple-700">
-                    Brief category description
-                  </p>
-                </div>
-                <div className="text-right text-sm text-purple-700">
-                  <p>Press to select!</p>
-                </div>
-              </div>
-            </div>
+            <EntertainmentCategory onCategoryUpdate={updateCategory} />
           )}
         </>
       </div>
