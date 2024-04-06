@@ -3,10 +3,12 @@
 import React, { useState } from "react";
 import GeneralCategory from "./components/generalCategory";
 import EntertainmentCategory from "./components/entertainmentCategory";
+import CustomizeCategory from "./components/customizeCategory";
 
 export default function Home() {
   const [section, setSection] = useState(true);
   const [category, setCategory] = useState("");
+  const [categorySelected, setCategorySelected] = useState(false);
 
   const firstSection = () => {
     setSection(true);
@@ -18,6 +20,11 @@ export default function Home() {
 
   const updateCategory = (newCategory) => {
     setCategory(newCategory);
+    setCategorySelected(true);
+  };
+
+  const navigateBack = () => {
+    setCategorySelected(false);
   };
 
   return (
@@ -40,28 +47,41 @@ export default function Home() {
             Current category: {category}
           </p>
           {/* ^^^ TO BE REMOVED ^^^ */}
-          <p className="text-yellow-200 text-md">Go to:</p>
-          <div>
-            <button
-              className="bg-green-400 text-green-700 w-52 h-8 rounded-lg m-2 hover:bg-green-500 transition-colors "
-              onClick={firstSection}
-            >
-              General & Sciences
-            </button>
-            <button
-              className="bg-purple-400 text-purple-700 w-52 h-8 rounded-lg m-2 hover:bg-purple-500 transition-colors"
-              onClick={secondSection}
-            >
-              Entertainment
-            </button>
-          </div>
         </div>
 
         <>
-          {section ? (
-            <GeneralCategory onCategoryUpdate={updateCategory} />
+          {categorySelected ? (
+            <>
+              <CustomizeCategory navigateBack={navigateBack} />
+            </>
           ) : (
-            <EntertainmentCategory onCategoryUpdate={updateCategory} />
+            <div>
+              <div className="flex flex-col items-center">
+                <p className="text-yellow-200 text-md">Go to:</p>
+                <div>
+                  <button
+                    className="bg-green-400 text-green-700 w-52 h-8 rounded-lg m-2 hover:bg-green-500 transition-colors "
+                    onClick={firstSection}
+                  >
+                    General & Sciences
+                  </button>
+                  <button
+                    className="bg-purple-400 text-purple-700 w-52 h-8 rounded-lg m-2 hover:bg-purple-500 transition-colors"
+                    onClick={secondSection}
+                  >
+                    Entertainment
+                  </button>
+                </div>
+              </div>
+
+              <>
+                {section ? (
+                  <GeneralCategory onCategoryUpdate={updateCategory} />
+                ) : (
+                  <EntertainmentCategory onCategoryUpdate={updateCategory} />
+                )}
+              </>
+            </div>
           )}
         </>
       </div>

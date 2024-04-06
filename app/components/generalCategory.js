@@ -8,6 +8,8 @@ export default function GeneralCategory({ onCategoryUpdate }) {
     setSelection(value);
   };
 
+  // TODO: Add onClick function to each buttons
+
   return (
     <div className="my-4 h-2/5 md:h-4/6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 overflow-auto">
       {/* General Knowledge = 9 */}
