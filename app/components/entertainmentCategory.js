@@ -8,7 +8,7 @@ export default function EntertainmentCategory({ onCategoryUpdate }) {
       {/* Books = 10 */}
       <div
         className="flex flex-col justify-between bg-purple-400 rounded-md h-32 p-2 cursor-pointer hover:bg-purple-500 transition-colors"
-        onClick={() => onCategoryUpdate("Books")}
+        onClick={() => onCategoryUpdate(10)}
       >
         <div>
           <p className="text-xl text-purple-800 underline">Books</p>
@@ -24,7 +24,7 @@ export default function EntertainmentCategory({ onCategoryUpdate }) {
       {/* Film = 11 */}
       <div
         className="flex flex-col justify-between bg-purple-400 rounded-md h-32 p-2 cursor-pointer hover:bg-purple-500 transition-colors"
-        onClick={() => onCategoryUpdate("Film")}
+        onClick={() => onCategoryUpdate(11)}
       >
         <div>
           <p className="text-xl text-purple-800 underline">Film</p>
@@ -41,7 +41,7 @@ export default function EntertainmentCategory({ onCategoryUpdate }) {
       {/* Music = 12 */}
       <div
         className="flex flex-col justify-between bg-purple-400 rounded-md h-32 p-2 cursor-pointer hover:bg-purple-500 transition-colors"
-        onClick={() => onCategoryUpdate("Music")}
+        onClick={() => onCategoryUpdate(12)}
       >
         <div>
           <p className="text-xl text-purple-800 underline">Music</p>
@@ -55,7 +55,10 @@ export default function EntertainmentCategory({ onCategoryUpdate }) {
         </div>
       </div>
       {/* Musicals and Theatres = 13 */}
-      <div className="flex flex-col justify-between bg-purple-400 rounded-md h-32 p-2 cursor-pointer hover:bg-purple-500 transition-colors">
+      <div
+        className="flex flex-col justify-between bg-purple-400 rounded-md h-32 p-2 cursor-pointer hover:bg-purple-500 transition-colors"
+        onClick={() => onCategoryUpdate(13)}
+      >
         <div>
           <p className="text-xl text-purple-800 underline">
             Musicals and Theatres
@@ -70,7 +73,10 @@ export default function EntertainmentCategory({ onCategoryUpdate }) {
         </div>
       </div>
       {/* Television = 14 */}
-      <div className="flex flex-col justify-between bg-purple-400 rounded-md h-32 p-2 cursor-pointer hover:bg-purple-500 transition-colors">
+      <div
+        className="flex flex-col justify-between bg-purple-400 rounded-md h-32 p-2 cursor-pointer hover:bg-purple-500 transition-colors"
+        onClick={() => onCategoryUpdate(14)}
+      >
         <div>
           <p className="text-xl text-purple-800 underline">Television</p>
           <p className="text-sm text-purple-700">
@@ -84,7 +90,10 @@ export default function EntertainmentCategory({ onCategoryUpdate }) {
         </div>
       </div>
       {/* Video Games = 15 */}
-      <div className="flex flex-col justify-between bg-purple-400 rounded-md h-32 p-2 cursor-pointer hover:bg-purple-500 transition-colors">
+      <div
+        className="flex flex-col justify-between bg-purple-400 rounded-md h-32 p-2 cursor-pointer hover:bg-purple-500 transition-colors"
+        onClick={() => onCategoryUpdate(15)}
+      >
         <div>
           <p className="text-xl text-purple-800 underline">Video Games</p>
           <p className="text-sm text-purple-700">
@@ -97,7 +106,10 @@ export default function EntertainmentCategory({ onCategoryUpdate }) {
         </div>
       </div>
       {/* Board Games = 16 */}
-      <div className="flex flex-col justify-between bg-purple-400 rounded-md h-32 p-2 cursor-pointer hover:bg-purple-500 transition-colors">
+      <div
+        className="flex flex-col justify-between bg-purple-400 rounded-md h-32 p-2 cursor-pointer hover:bg-purple-500 transition-colors"
+        onClick={() => onCategoryUpdate(16)}
+      >
         <div>
           <p className="text-xl text-purple-800 underline">Board Games</p>
           <p className="text-sm text-purple-700">
@@ -110,7 +122,10 @@ export default function EntertainmentCategory({ onCategoryUpdate }) {
         </div>
       </div>
       {/* Comics = 29 */}
-      <div className="flex flex-col justify-between bg-purple-400 rounded-md h-32 p-2 cursor-pointer hover:bg-purple-500 transition-colors">
+      <div
+        className="flex flex-col justify-between bg-purple-400 rounded-md h-32 p-2 cursor-pointer hover:bg-purple-500 transition-colors"
+        onClick={() => onCategoryUpdate(29)}
+      >
         <div>
           <p className="text-xl text-purple-800 underline">Comics</p>
           <p className="text-sm text-purple-700">
@@ -123,7 +138,10 @@ export default function EntertainmentCategory({ onCategoryUpdate }) {
         </div>
       </div>
       {/* Japanese Anime & Manga = 31 */}
-      <div className="flex flex-col justify-between bg-purple-400 rounded-md h-32 p-2 cursor-pointer hover:bg-purple-500 transition-colors">
+      <div
+        className="flex flex-col justify-between bg-purple-400 rounded-md h-32 p-2 cursor-pointer hover:bg-purple-500 transition-colors"
+        onClick={() => onCategoryUpdate(31)}
+      >
         <div>
           <p className="text-xl text-purple-800 underline">
             Japanese Anime & Manga
@@ -138,7 +156,10 @@ export default function EntertainmentCategory({ onCategoryUpdate }) {
         </div>
       </div>
       {/* Cartoons & Animations = 32 */}
-      <div className="flex flex-col justify-between bg-purple-400 rounded-md h-32 p-2 cursor-pointer hover:bg-purple-500 transition-colors">
+      <div
+        className="flex flex-col justify-between bg-purple-400 rounded-md h-32 p-2 cursor-pointer hover:bg-purple-500 transition-colors"
+        onClick={() => onCategoryUpdate(32)}
+      >
         <div>
           <p className="text-xl text-purple-800 underline">
             Cartoons & Animations

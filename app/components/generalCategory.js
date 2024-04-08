@@ -2,20 +2,12 @@ import React from "react";
 import { useState } from "react";
 
 export default function GeneralCategory({ onCategoryUpdate }) {
-  const [selection, setSelection] = useState("");
-
-  const handleSelection = (value) => {
-    setSelection(value);
-  };
-
-  // TODO: Add onClick function to each buttons
-
   return (
     <div className="my-4 h-2/5 md:h-4/6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 overflow-auto">
       {/* General Knowledge = 9 */}
       <div
         className="flex flex-col justify-between bg-green-400 rounded-md h-32 p-2 cursor-pointer hover:bg-green-500 transition-colors"
-        onClick={() => onCategoryUpdate("General Knowledge")}
+        onClick={() => onCategoryUpdate(9)}
       >
         <div>
           <p className="text-xl text-green-800 underline">General Knowledge</p>
@@ -31,7 +23,7 @@ export default function GeneralCategory({ onCategoryUpdate }) {
       {/* Science & Nature = 17 */}
       <div
         className="flex flex-col justify-between bg-green-400 rounded-md h-32 p-2 cursor-pointer hover:bg-green-500 transition-colors"
-        onClick={() => onCategoryUpdate("Science & Nature")}
+        onClick={() => onCategoryUpdate(17)}
       >
         <div>
           <p className="text-xl text-green-800 underline">Science & Nature</p>
@@ -47,7 +39,7 @@ export default function GeneralCategory({ onCategoryUpdate }) {
       {/* Science: Computers = 18*/}
       <div
         className="flex flex-col justify-between bg-green-400 rounded-md h-32 p-2 cursor-pointer hover:bg-green-500 transition-colors"
-        onClick={() => onCategoryUpdate("Science: Computers")}
+        onClick={() => onCategoryUpdate(18)}
       >
         <div>
           <p className="text-xl text-green-800 underline">Science: Computers</p>
@@ -61,7 +53,10 @@ export default function GeneralCategory({ onCategoryUpdate }) {
         </div>
       </div>
       {/* Science: Mathematics = 19 */}
-      <div className="flex flex-col justify-between bg-green-400 rounded-md h-32 p-2 cursor-pointer hover:bg-green-500 transition-colors">
+      <div
+        className="flex flex-col justify-between bg-green-400 rounded-md h-32 p-2 cursor-pointer hover:bg-green-500 transition-colors"
+        onClick={() => onCategoryUpdate(19)}
+      >
         <div>
           <p className="text-xl text-green-800 underline">
             Science: Mathematics
@@ -76,7 +71,10 @@ export default function GeneralCategory({ onCategoryUpdate }) {
         </div>
       </div>
       {/* Mythology = 20 */}
-      <div className="flex flex-col justify-between bg-green-400 rounded-md h-32 p-2 cursor-pointer hover:bg-green-500 transition-colors">
+      <div
+        className="flex flex-col justify-between bg-green-400 rounded-md h-32 p-2 cursor-pointer hover:bg-green-500 transition-colors"
+        onClick={() => onCategoryUpdate(20)}
+      >
         <div>
           <p className="text-xl text-green-800 underline">Mythology</p>
           <p className="text-sm text-green-700">
@@ -89,7 +87,10 @@ export default function GeneralCategory({ onCategoryUpdate }) {
         </div>
       </div>
       {/* Sports = 21 */}
-      <div className="flex flex-col justify-between bg-green-400 rounded-md h-32 p-2 cursor-pointer hover:bg-green-500 transition-colors">
+      <div
+        className="flex flex-col justify-between bg-green-400 rounded-md h-32 p-2 cursor-pointer hover:bg-green-500 transition-colors"
+        onClick={() => onCategoryUpdate(21)}
+      >
         <div>
           <p className="text-xl text-green-800 underline">Sports</p>
           <p className="text-sm text-green-700">
@@ -102,7 +103,10 @@ export default function GeneralCategory({ onCategoryUpdate }) {
         </div>
       </div>
       {/* Geography = 22 */}
-      <div className="flex flex-col justify-between bg-green-400 rounded-md h-32 p-2 cursor-pointer hover:bg-green-500 transition-colors">
+      <div
+        className="flex flex-col justify-between bg-green-400 rounded-md h-32 p-2 cursor-pointer hover:bg-green-500 transition-colors"
+        onClick={() => onCategoryUpdate(22)}
+      >
         <div>
           <p className="text-xl text-green-800 underline">Geography</p>
           <p className="text-sm text-green-700">
@@ -115,7 +119,10 @@ export default function GeneralCategory({ onCategoryUpdate }) {
         </div>
       </div>
       {/* History = 23 */}
-      <div className="flex flex-col justify-between bg-green-400 rounded-md h-32 p-2 cursor-pointer hover:bg-green-500 transition-colors">
+      <div
+        className="flex flex-col justify-between bg-green-400 rounded-md h-32 p-2 cursor-pointer hover:bg-green-500 transition-colors"
+        onClick={() => onCategoryUpdate(23)}
+      >
         <div>
           <p className="text-xl text-green-800 underline">History</p>
           <p className="text-sm text-green-700">
@@ -128,7 +135,10 @@ export default function GeneralCategory({ onCategoryUpdate }) {
         </div>
       </div>
       {/* Politics = 24 */}
-      <div className="flex flex-col justify-between bg-green-400 rounded-md h-32 p-2 cursor-pointer hover:bg-green-500 transition-colors">
+      <div
+        className="flex flex-col justify-between bg-green-400 rounded-md h-32 p-2 cursor-pointer hover:bg-green-500 transition-colors"
+        onClick={() => onCategoryUpdate(24)}
+      >
         <div>
           <p className="text-xl text-green-800 underline">Politics</p>
           <p className="text-sm text-green-700">
@@ -141,7 +151,10 @@ export default function GeneralCategory({ onCategoryUpdate }) {
         </div>
       </div>
       {/* Art = 25 */}
-      <div className="flex flex-col justify-between bg-green-400 rounded-md h-32 p-2 cursor-pointer hover:bg-green-500 transition-colors">
+      <div
+        className="flex flex-col justify-between bg-green-400 rounded-md h-32 p-2 cursor-pointer hover:bg-green-500 transition-colors"
+        onClick={() => onCategoryUpdate(25)}
+      >
         <div>
           <p className="text-xl text-green-800 underline">Art</p>
           <p className="text-sm text-green-700">
@@ -154,7 +167,10 @@ export default function GeneralCategory({ onCategoryUpdate }) {
         </div>
       </div>
       {/* Celebrities = 26 */}
-      <div className="flex flex-col justify-between bg-green-400 rounded-md h-32 p-2 cursor-pointer hover:bg-green-500 transition-colors">
+      <div
+        className="flex flex-col justify-between bg-green-400 rounded-md h-32 p-2 cursor-pointer hover:bg-green-500 transition-colors"
+        onClick={() => onCategoryUpdate(26)}
+      >
         <div>
           <p className="text-xl text-green-800 underline">Celebrities</p>
           <p className="text-sm text-green-700">
@@ -167,7 +183,10 @@ export default function GeneralCategory({ onCategoryUpdate }) {
         </div>
       </div>
       {/* Animals = 27 */}
-      <div className="flex flex-col justify-between bg-green-400 rounded-md h-32 p-2 cursor-pointer hover:bg-green-500 transition-colors">
+      <div
+        className="flex flex-col justify-between bg-green-400 rounded-md h-32 p-2 cursor-pointer hover:bg-green-500 transition-colors"
+        onClick={() => onCategoryUpdate(27)}
+      >
         <div>
           <p className="text-xl text-green-800 underline">Animals</p>
           <p className="text-sm text-green-700">
@@ -180,7 +199,10 @@ export default function GeneralCategory({ onCategoryUpdate }) {
         </div>
       </div>
       {/* Vehicles = 28 */}
-      <div className="flex flex-col justify-between bg-green-400 rounded-md h-32 p-2 cursor-pointer hover:bg-green-500 transition-colors">
+      <div
+        className="flex flex-col justify-between bg-green-400 rounded-md h-32 p-2 cursor-pointer hover:bg-green-500 transition-colors"
+        onClick={() => onCategoryUpdate(28)}
+      >
         <div>
           <p className="text-xl text-green-800 underline">Vehicles</p>
           <p className="text-sm text-green-700">
@@ -193,7 +215,10 @@ export default function GeneralCategory({ onCategoryUpdate }) {
         </div>
       </div>
       {/* Science: Gadgets = 30 */}
-      <div className="flex flex-col justify-between bg-green-400 rounded-md h-32 p-2 cursor-pointer hover:bg-green-500 transition-colors">
+      <div
+        className="flex flex-col justify-between bg-green-400 rounded-md h-32 p-2 cursor-pointer hover:bg-green-500 transition-colors"
+        onClick={() => onCategoryUpdate(30)}
+      >
         <div>
           <p className="text-lg text-green-800 underline">Science: Gadgets</p>
           <p className="text-sm text-green-700">
