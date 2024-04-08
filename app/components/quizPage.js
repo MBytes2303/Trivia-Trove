@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
 import InvalidParameters from "./invalidParameters";
 
 export default function QuizPage({
@@ -24,32 +23,36 @@ export default function QuizPage({
   // need type
   const quizType = type;
 
-  const fetchQuestions = async () => {
-    try {
-      // API formats:
-      // only category and number questions chosen:             https://opentdb.com/api.php?amount=10&category=9
-      // category, number of questions and difficulty chosen:   https://opentdb.com/api.php?amount=10&category=9&difficulty=easy
-      // all options chosen:                                    https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=multiple
-      const response = await fetch(
-        `https://opentdb.com/api.php?amount=${quizAmount}&category=${quizCategory}${quizDifficulty}${quizType}`
-      );
-      if (!response.ok) {
-        throw new Error("Failed to fetch questions");
-      }
-      const questionsResponse = await response.json();
-      setTriviaData(questionsResponse.results);
-      setResponseCode(questionsResponse.response_code);
+  useEffect(() => {
+    const fetchQuizData = async () => {
+      try {
+        // API formats:
+        // only category and number questions chosen:             https://opentdb.com/api.php?amount=10&category=9
+        // category, number of questions and difficulty chosen:   https://opentdb.com/api.php?amount=10&category=9&difficulty=easy
+        // all options chosen:                                    https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=multiple
+        const response = await fetch(
+          `https://opentdb.com/api.php?amount=${quizAmount}&category=${quizCategory}${quizDifficulty}${quizType}`
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch questions");
+        }
+        const questionsResponse = await response.json();
+        setTriviaData(questionsResponse.results);
+        setResponseCode(questionsResponse.response_code);
 
-      if (responseCode === 0) {
-        setValidRequest(true);
-        console.log("Questions fetched successfully!");
-      } else {
-        setValidRequest(false);
+        if (responseCode === 0 && quizAmount > 0) {
+          setValidRequest(true);
+          console.log("Questions fetched successfully!");
+        } else {
+          setValidRequest(false);
+        }
+      } catch (error) {
+        console.error(error.message);
       }
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
+    };
+
+    fetchQuizData();
+  }, []);
 
   const showQuestions = () => {
     console.log(triviaData);
@@ -58,7 +61,7 @@ export default function QuizPage({
   return (
     <main className="bg-gray-300 flex justify-center py-4 h-screen w-screen overflow-auto">
       <div className="w-10/12 h-11/12 bg-gray-700 drop-shadow-md rounded-lg p-4">
-        <button onClick={fetchQuestions}>Fetch Questions</button>
+        {/* <button onClick={fetchQuestions}>Fetch Questions</button> */}
         <button onClick={showQuestions}>Show Questions</button>
         {validRequest ? (
           <>

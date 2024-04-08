@@ -41,6 +41,7 @@ export default function Home() {
     setAmount(0);
     setDifficulty("");
     setType("");
+    setMainScreen(true);
   };
 
   return (
@@ -122,7 +123,8 @@ export default function Home() {
         </main>
       ) : (
         <QuizPage
-          navigateQuiz={() => setMainScreen(true)}
+          // navigateQuiz={() => setMainScreen(true)}
+          navigateQuiz={navigateBack}
           amount={amount}
           catNum={category}
           difficulty={difficulty}
