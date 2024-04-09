@@ -14,6 +14,14 @@ export default function QuizPage({
   const [responseCode, setResponseCode] = useState(0);
   const [validRequest, setValidRequest] = useState(false);
 
+  const [timer, setTimer] = useState(null);
+  const [seconds, setSeconds] = useState(5);
+  const [quizStarted, setQuizStarted] = useState(false);
+  const [quizFinished, setQuizFinished] = useState(false);
+  const [timeUp, setTimeUp] = useState(false);
+
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+
   // need amount of questions
   const quizAmount = amount;
   // need category number
@@ -58,6 +66,50 @@ export default function QuizPage({
     console.log(triviaData);
     console.log(responseCode);
   };
+
+  const startTimer = () => {
+    setSeconds(5);
+    const timerId = setInterval(() => {
+      setSeconds((prevSeconds) => {
+        if (prevSeconds === 0) {
+          clearInterval(timerId);
+          setTimeUp(true);
+          return 0;
+        }
+        return prevSeconds - 1;
+      });
+    }, 1000); // 1000 milliseconds = 1 second
+    setTimer(timerId);
+  };
+
+  const stopTimer = () => {
+    clearInterval(timer);
+    setTimer(null);
+  };
+
+  // Function to reset the timer
+  const resetTimer = () => {
+    clearInterval(timer);
+    setTimer(null);
+    setSeconds(10);
+    setTimeReached(false);
+  };
+
+  const startQuiz = () => {
+    setQuizStarted(true);
+    startTimer();
+  };
+
+  const nextQuestion = () => {
+    if (currentQuestionIndex < triviaData.length - 1) {
+      startTimer();
+      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+      setTimeUp(false);
+    } else {
+      setQuizFinished(true);
+    }
+  };
+
   return (
     <main className="bg-gray-300 flex justify-center py-4 h-screen w-screen overflow-auto">
       <div className="w-10/12 h-11/12 bg-gray-700 drop-shadow-md rounded-lg p-4">
@@ -65,11 +117,33 @@ export default function QuizPage({
         <button onClick={showQuestions}>Show Questions</button>
         {validRequest ? (
           <>
-            <h1>Valid quiz Request</h1>
-            <div>{amount}</div>
-            <div>{difficulty}</div>
-            <div>{catNum}</div>
-            <div>{type}</div>
+            {quizStarted ? (
+              <div>
+                <p>{seconds}</p>
+                <p>{currentQuestionIndex}</p>
+                {/* <button onClick={nextQuestion}>Next</button> */}
+                {quizFinished ? (
+                  <ResultCard />
+                ) : (
+                  <>
+                    <QuizCard
+                      currQuestion={triviaData[currentQuestionIndex]}
+                      timerState={timeUp}
+                    />
+                    {timeUp && <button onClick={nextQuestion}>Next</button>}
+                  </>
+                )}
+              </div>
+            ) : (
+              <div>
+                <button
+                  className="p-2 rounded-md bg-sky-500 hover:bg-sky-700 transition-colors"
+                  onClick={startQuiz}
+                >
+                  Ready!
+                </button>
+              </div>
+            )}
           </>
         ) : (
           <>
@@ -77,24 +151,21 @@ export default function QuizPage({
           </>
         )}
 
-        {/* <div>
-          {triviaData &&
-            Object.values(triviaData).map((item, index) => (
-              <>
-                <div key={index}>
-                  <p>Question: {item.question}</p>
-                  <p>Type: {item.type}</p>
-                </div>
-              </>
-            ))}
-        </div> */}
         <button
-          className="p-2 rounded-md bg-sky-500 hover:bg-sky-700 transition-colors"
+          className="p-2 rounded-md bg-red-500 hover:bg-red-700 transition-colors"
           onClick={navigateQuiz}
         >
-          Home
+          Go Back
         </button>
       </div>
     </main>
   );
+}
+
+function QuizCard({ currQuestion, timerState }) {
+  return <div>{currQuestion.question}</div>;
+}
+
+function ResultCard() {
+  return <div>Your results would show here</div>;
 }
