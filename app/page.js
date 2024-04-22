@@ -47,8 +47,8 @@ export default function Home() {
   return (
     <>
       {mainScreen ? (
-        <main className="bg-gray-300 flex justify-center py-4 h-screen w-screen overflow-auto">
-          <div className="w-10/12 h-11/12 bg-gray-700 drop-shadow-md rounded-lg p-4">
+        <main className="bg-gray-300 flex justify-center py-4 h-screen w-screen">
+          <div className="w-10/12 h-11/12 bg-gray-700 drop-shadow-md rounded-lg p-4 overflow-auto">
             <div>
               <h1 className="text-3xl sm:text-5xl text-center text-yellow-200 align-middle font-serif font-bold">
                 Trivia Trove
@@ -59,19 +59,6 @@ export default function Home() {
                 your knowledge to the test with challenging questions and
                 uncover obscure facts! Start by selecting a category below!
               </p>
-            </div>
-            <div className="flex flex-col items-center">
-              {/* TODO: this is a placeholder test for updating the API values */}
-              <p className="text-yellow-200 text-md">
-                Current category: {category}
-                <br />
-                Current amount: {amount}
-                <br />
-                Current difficulty: {difficulty}
-                <br />
-                Current type: {type}
-              </p>
-              {/* ^^^ TO BE REMOVED ^^^ */}
             </div>
 
             <>
@@ -123,7 +110,6 @@ export default function Home() {
         </main>
       ) : (
         <QuizPage
-          // navigateQuiz={() => setMainScreen(true)}
           navigateQuiz={navigateBack}
           amount={amount}
           catNum={category}

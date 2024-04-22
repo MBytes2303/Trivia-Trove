@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import Link from "next/link";
+import React from "react";
 
 export default function CustomizeCategory({
   navigateBack,
@@ -8,22 +7,6 @@ export default function CustomizeCategory({
   updateDifficulty,
   updateType,
 }) {
-  // const [amount, setAmount] = useState(0);
-  // const [difficulty, setDifficulty] = useState("");
-  // const [type, setType] = useState("");
-
-  // const handleAmount = (event) => {
-  //   setAmount(parseInt(event.target.value));
-  // };
-
-  // const handleDifficulty = (event) => {
-  //   setDifficulty(event.target.value);
-  // };
-
-  // const handleType = (event) => {
-  //   setType(event.target.value);
-  // };
-
   return (
     <div className="flex justify-center items-center h-3/5">
       <form>
@@ -64,7 +47,7 @@ export default function CustomizeCategory({
             <option value={"&type=boolean"}>True/False</option>
           </select>
         </div>
-        <div className="flex justify-between">
+        <div className="flex justify-between ">
           <button
             type="button"
             className="bg-gray-600 p-2 rounded-md"

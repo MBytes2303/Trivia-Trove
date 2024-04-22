@@ -1,10 +1,8 @@
 import React from "react";
 
 export default function EntertainmentCategory({ onCategoryUpdate }) {
-  // TODO: Add onClick function to each buttons
-
   return (
-    <div className="my-4 h-2/5 md:h-4/6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 overflow-auto">
+    <div className="my-4 h-2/5 md:h-4/6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
       {/* Books = 10 */}
       <div
         className="flex flex-col justify-between bg-purple-400 rounded-md h-32 p-2 cursor-pointer hover:bg-purple-500 transition-colors"

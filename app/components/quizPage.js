@@ -15,12 +15,15 @@ export default function QuizPage({
   const [validRequest, setValidRequest] = useState(false);
 
   const [timer, setTimer] = useState(null);
-  const [seconds, setSeconds] = useState(5);
+  const [seconds, setSeconds] = useState(15);
   const [quizStarted, setQuizStarted] = useState(false);
   const [quizFinished, setQuizFinished] = useState(false);
   const [timeUp, setTimeUp] = useState(false);
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+
+  const [points, setPoints] = useState(0);
+  const [maxPoints, setMaxPoints] = useState(0);
 
   // need amount of questions
   const quizAmount = amount;
@@ -47,6 +50,7 @@ export default function QuizPage({
         const questionsResponse = await response.json();
         setTriviaData(questionsResponse.results);
         setResponseCode(questionsResponse.response_code);
+        setMaxPoints(questionsResponse.results.length);
 
         if (responseCode === 0 && quizAmount > 0) {
           setValidRequest(true);
@@ -68,11 +72,11 @@ export default function QuizPage({
   };
 
   const startTimer = () => {
-    setSeconds(5);
+    setSeconds(15);
     const timerId = setInterval(() => {
       setSeconds((prevSeconds) => {
+        setTimeUp(false);
         if (prevSeconds === 0) {
-          clearInterval(timerId);
           setTimeUp(true);
           return 0;
         }
@@ -82,65 +86,63 @@ export default function QuizPage({
     setTimer(timerId);
   };
 
-  const stopTimer = () => {
-    clearInterval(timer);
-    setTimer(null);
-  };
-
-  // Function to reset the timer
-  const resetTimer = () => {
-    clearInterval(timer);
-    setTimer(null);
-    setSeconds(10);
-    setTimeReached(false);
-  };
-
   const startQuiz = () => {
     setQuizStarted(true);
     startTimer();
   };
 
   const nextQuestion = () => {
+    setTimeUp(false);
     if (currentQuestionIndex < triviaData.length - 1) {
-      startTimer();
+      setSeconds(15);
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-      setTimeUp(false);
     } else {
       setQuizFinished(true);
     }
   };
 
+  const timerBar = () => {
+    return (seconds / 15) * 100;
+  };
+
+  const handlePoints = () => {
+    setPoints(points + 1);
+  };
+
   return (
     <main className="bg-gray-300 flex justify-center py-4 h-screen w-screen overflow-auto">
-      <div className="w-10/12 h-11/12 bg-gray-700 drop-shadow-md rounded-lg p-4">
-        {/* <button onClick={fetchQuestions}>Fetch Questions</button> */}
-        <button onClick={showQuestions}>Show Questions</button>
+      <div className="w-10/12 h-11/12 bg-gray-700 drop-shadow-md rounded-lg p-4 flex justify-between items-center flex-col">
         {validRequest ? (
           <>
             {quizStarted ? (
-              <div>
-                <p>{seconds}</p>
-                <p>{currentQuestionIndex}</p>
-                {/* <button onClick={nextQuestion}>Next</button> */}
+              <div className="w-9/12 my-28">
+                <p className="text-slate-100 text-center text-lg">
+                  {currentQuestionIndex + 1} out of {maxPoints} questions
+                </p>
                 {quizFinished ? (
-                  <ResultCard />
+                  <ResultCard points={points} maxPoints={maxPoints} />
                 ) : (
                   <>
                     <QuizCard
                       currQuestion={triviaData[currentQuestionIndex]}
-                      timerState={timeUp}
+                      handlePoints={handlePoints}
+                      nextQuestion={nextQuestion}
+                      timeState={timeUp}
                     />
-                    {timeUp && <button onClick={nextQuestion}>Next</button>}
+                    <div
+                      className="bg-gray-500 h-5"
+                      style={{ width: `${timerBar()}%` }}
+                    ></div>
                   </>
                 )}
               </div>
             ) : (
-              <div>
+              <div className="mt-64">
                 <button
-                  className="p-2 rounded-md bg-sky-500 hover:bg-sky-700 transition-colors"
+                  className="p-4 rounded-md bg-sky-500 hover:bg-sky-700 transition-colors text-xl"
                   onClick={startQuiz}
                 >
-                  Ready!
+                  Ready?
                 </button>
               </div>
             )}
@@ -150,22 +152,96 @@ export default function QuizPage({
             <InvalidParameters navigateQuiz={navigateQuiz} />
           </>
         )}
-
-        <button
-          className="p-2 rounded-md bg-red-500 hover:bg-red-700 transition-colors"
-          onClick={navigateQuiz}
-        >
-          Go Back
-        </button>
+        <div className="flex justify-between w-9/12">
+          <button
+            className="p-2 rounded-md bg-red-500 hover:bg-red-700 transition-colors w-40"
+            onClick={navigateQuiz}
+          >
+            Exit
+          </button>
+          {timeUp && (
+            <button
+              className="p-2 rounded-md bg-blue-500 hover:bg-blue-700 transition-colors w-40"
+              onClick={nextQuestion}
+            >
+              Next
+            </button>
+          )}
+        </div>
       </div>
     </main>
   );
 }
 
-function QuizCard({ currQuestion, timerState }) {
-  return <div>{currQuestion.question}</div>;
+function QuizCard({ currQuestion, handlePoints, nextQuestion, timeState }) {
+  const [possibleAnswers, setPossibleAnswers] = useState([]);
+
+  function shuffle(array) {
+    let shuffledArray = [];
+    let usedIndexes = [];
+
+    let i = 0;
+    while (i < array.length) {
+      let randomNumber = Math.floor(Math.random() * array.length);
+      if (!usedIndexes.includes(randomNumber)) {
+        shuffledArray.push(array[randomNumber]);
+        usedIndexes.push(randomNumber);
+        i++;
+      }
+    }
+    return shuffledArray;
+  }
+
+  useEffect(() => {
+    let answers = [
+      ...currQuestion.incorrect_answers,
+      currQuestion.correct_answer,
+    ];
+
+    const shuffledAnswers = shuffle(answers);
+    setPossibleAnswers(shuffledAnswers);
+  }, [currQuestion]);
+
+  const handleAnswer = (answer) => {
+    console.log(answer);
+    if (answer === currQuestion.correct_answer) {
+      handlePoints();
+      console.log(currQuestion.correct_answer);
+    }
+    nextQuestion();
+  };
+
+  return (
+    <div className="bg-green-500 h-72 rounded-t-lg">
+      <p className="text-slate-950 text-center py-2 text-2xl my-2">
+        {currQuestion.question}
+      </p>
+      <div className="grid grid-cols-2">
+        {possibleAnswers.map((element, index) => (
+          <button
+            key={index}
+            onClick={(event) => handleAnswer(event.target.value)}
+            value={element}
+            className="text-slate-950 bg-cyan-600 p-4 m-4 rounded-lg"
+            disabled={timeState}
+          >
+            {element}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
 }
 
-function ResultCard() {
-  return <div>Your results would show here</div>;
+function ResultCard({ points, maxPoints }) {
+  return (
+    <div className="bg-green-500 h-72 rounded-lg flex flex-col justify-center items-center">
+      <p className="text-slate-950 text-3xl my-10">Quiz Over!</p>
+      <p className="text-slate-950 text-lg">
+        You Scored:
+        <br />
+        {points} / {maxPoints}
+      </p>
+    </div>
+  );
 }

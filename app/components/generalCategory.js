@@ -1,9 +1,8 @@
 import React from "react";
-import { useState } from "react";
 
 export default function GeneralCategory({ onCategoryUpdate }) {
   return (
-    <div className="my-4 h-2/5 md:h-4/6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 overflow-auto">
+    <div className="my-4 h-2/5 md:h-4/6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
       {/* General Knowledge = 9 */}
       <div
         className="flex flex-col justify-between bg-green-400 rounded-md h-32 p-2 cursor-pointer hover:bg-green-500 transition-colors"
