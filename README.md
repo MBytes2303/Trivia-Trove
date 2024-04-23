@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Trivia Trove
 
-## Getting Started
+---
 
-First, run the development server:
+## Project Overview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+This project is a trivia quiz website that utilizes the [Open Trivia Database API] (https://opentdb.com/api_config.php)
+to provide users with a platform for testing their knowledge in various categories. The Open Trivia Database API offers
+a wide range of trivia questions across different categories and different levels. Users can customize their triva experience
+by selecting the categories they are interested in, specifying the number of question they want to answer, choosing the difficulty,
+and selecting the type of question they prefer.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Installation
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+-To install this project, go ahead an clone the repo:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+git clone https://github.com/MBytes2303/Trivia-Trove.git
 
-## Learn More
+-Navigate to the project directory and install the necesarry dependencies
 
-To learn more about Next.js, take a look at the following resources:
+npm install
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+-To run locally, run this command:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+npm run start
 
-## Deploy on Vercel
+## Deployed on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This project is deployed on Vercel. You can visit the site by using this link:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+[Trivia Trove] (https://trivia-trove-amber.vercel.app/)
